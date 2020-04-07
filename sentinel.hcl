@@ -1,4 +1,4 @@
-policy "machine-type-policyy" {
+policy "machine-type-policy" {
     enforcement_level = "soft-mandatory"
 }
 policy "node-count-policy" {
