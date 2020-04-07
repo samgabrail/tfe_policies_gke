@@ -1,5 +1,4 @@
-# All GKE nodes have vm sizes from an allowed list. The list of allowed_vm_sizes = ["f1-micro", "g1-small", "n1-standard-1"]
-# There is also a limit on the number of nodes to not exceed 9
+# All GKE nodes have vm sizes from an allowed list. The list of allowed_vm_sizes = ["f1-micro", "g1-small", "n1-standard-1"] There is also a limit on the number of nodes to not exceed 9
 
 import "tfplan"
 
