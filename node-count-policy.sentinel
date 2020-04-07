@@ -1,0 +1,17 @@
+# There is also a limit on the number of nodes to not exceed 9
+
+import "tfplan"
+
+clusters = tfplan.resources.google_container_cluster
+
+node_count_limit = rule {
+  all clusters as name, instances {
+    all instances as index, r {
+      int(r.applied.initial_node_count) < 10
+    }
+  }
+}
+
+main = rule {
+  (node_count_limit) else true
+}

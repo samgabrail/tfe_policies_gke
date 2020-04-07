@@ -1,17 +1,8 @@
 # All GKE nodes have vm sizes from an allowed list. The list of allowed_vm_sizes = ["f1-micro", "g1-small", "n1-standard-1"] 
-# There is also a limit on the number of nodes to not exceed 9
 
 import "tfplan"
 
 clusters = tfplan.resources.google_container_cluster
-
-node_count_limit = rule {
-  all clusters as name, instances {
-    all instances as index, r {
-      int(r.applied.initial_node_count) < 10
-    }
-  }
-}
 
 machine_type_allowed = rule {
   all clusters as name, instances {
@@ -22,5 +13,5 @@ machine_type_allowed = rule {
 }
 
 main = rule {
-  (machine_type_allowed and node_count_limit) else true
+  (machine_type_allowed) else true
 }
