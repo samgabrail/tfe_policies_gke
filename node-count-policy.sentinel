@@ -7,7 +7,7 @@ clusters = tfplan.resources.google_container_cluster
 node_count_limit = rule {
   all clusters as name, instances {
     all instances as index, r {
-      int(r.applied.initial_node_count) < 10
+      int(r.applied.nodepool_node_count) < 10
     }
   }
 }
