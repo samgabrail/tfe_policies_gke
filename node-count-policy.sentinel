@@ -3,9 +3,18 @@
 import "tfplan"
 
 clusters = tfplan.resources.google_container_cluster
+nodepools = tfplan.resources.google_container_node_pool
 
-node_count_limit = rule {
+cluster_node_count_limit = rule {
   all clusters as name, instances {
+    all instances as index, r {
+      int(r.applied.initial_node_count) < 10
+    }
+  }
+}
+
+nodepool_node_count_limit = rule {
+  all nodepools as name, instances {
     all instances as index, r {
       int(r.applied.node_count) < 10
     }
@@ -13,5 +22,5 @@ node_count_limit = rule {
 }
 
 main = rule {
-  (node_count_limit) else true
+  (cluster_node_count_limit and ) else true
 }
