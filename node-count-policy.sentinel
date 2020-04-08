@@ -22,5 +22,5 @@ nodepool_node_count_limit = rule {
 }
 
 main = rule {
-  (cluster_node_count_limit and ) else true
+  (cluster_node_count_limit and nodepool_node_count_limit) else true
 }
